@@ -12,9 +12,18 @@ const TextField = (props) => {
             props.setState({...props.state, fieldText: "", ...tasks})
         }
     }
+    const onKeyPress = event => {
+        if (event.key === 'Enter') {
+            if (props.state.fieldText) {
+                let tasks = props.state.tasks.push({title: props.state.fieldText, isChecked: false})
+                props.setState({...props.state, fieldText: "", ...tasks})
+            }
+        }
+    }
     return (
         <div className={s.text_field}>
-            <input placeholder="Введите текст задачи" onChange={(e) => onTextChange(e.target.value)} value={props.fieldText}/>
+            <input placeholder="Введите текст задачи" onKeyPress={onKeyPress}
+                   onChange={(e) => onTextChange(e.target.value)} value={props.fieldText}/>
             <button className={s.add} onClick={onAddClick}><i className="fa fa-plus"></i></button>
         </div>
     );

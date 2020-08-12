@@ -33,4 +33,6 @@ body {
 
 }
 .list {
+    overflow: auto;
+    height: 390px;
 }

@@ -22,6 +22,7 @@
     border: 2px solid #db4c3f;
     border-radius: 100%;
     cursor: pointer;
+    background: transparent;
 }
 
 .title {
