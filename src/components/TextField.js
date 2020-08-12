@@ -22,7 +22,7 @@ const TextField = (props) => {
     }
     return (
         <div className={s.text_field}>
-            <input placeholder="Введите текст задачи" onKeyPress={onKeyPress}
+            <input placeholder="Введите текст задачи" onKeyPress={onKeyPress} autoFocus={true}
                    onChange={(e) => onTextChange(e.target.value)} value={props.fieldText}/>
             <button className={s.add} onClick={onAddClick}><i className="fa fa-plus"></i></button>
         </div>

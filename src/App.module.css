@@ -36,3 +36,17 @@ body {
     overflow: auto;
     height: 390px;
 }
+
+@media screen and (max-device-width: 530px) {
+    .todo {
+        width: 100%;
+        border-radius: 0;
+        height: 100%;
+    }
+    .main {
+        height: 100%;
+    }
+    .list {
+        height: calc(100% - 110px);
+    }
+}

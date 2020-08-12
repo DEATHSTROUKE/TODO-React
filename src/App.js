@@ -2,13 +2,22 @@ import React from 'react';
 import s from './App.module.css';
 import TextField from "./components/TextField";
 import Task from "./components/Task";
+import axios from 'axios';
+import {server_ip} from "./config";
 
 const App = () => {
-    const st = {
-        fieldText: "",
-        tasks: [{title: 'Выучить математику', isChecked: true}]
-    }
-    const [state, setState] = React.useState({...st})
+    const [state, setState] = React.useState({fieldText: "", tasks: []})
+    React.useEffect(() => {
+        let st = {
+            fieldText: "",
+            tasks: []
+        }
+        axios.get(`${server_ip}/api/todo`).then(res => {
+            st.tasks = res.data
+            setState(st)
+        })
+    }, [])
+
     const onChecked = (id) => {
         let tasks = state.tasks
         tasks[id].isChecked = !tasks[id].isChecked
