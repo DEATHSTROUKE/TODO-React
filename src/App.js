@@ -15,7 +15,6 @@ const App = () => {
         setState({...state, tasks})
     }
     const onDelete = (id) => {
-        console.log(id)
         let tasks = state.tasks
         tasks.splice(id, 1)
         setState({...state, tasks})

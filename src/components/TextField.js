@@ -4,7 +4,6 @@ import 'font-awesome/css/font-awesome.css'
 
 const TextField = (props) => {
     const onTextChange = (text) => {
-        console.log(text)
         props.setState({...props.state, fieldText: text})
     }
     const onAddClick = () => {
