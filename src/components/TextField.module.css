@@ -1,0 +1,27 @@
+.text_field {
+    display: flex;
+    border-bottom: 2px solid #f8f8f8;
+}
+
+input {
+    flex: 1;
+    font-size: 16px;
+    padding: 15px;
+    border: none;
+}
+
+.add {
+    background: #fff;
+    border: none;
+    width: 50px;
+    cursor: pointer;
+}
+
+.add:hover {
+    background: #f8f8f8;
+}
+
+.add i {
+    color: grey;
+    font-weight: lighter;
+}

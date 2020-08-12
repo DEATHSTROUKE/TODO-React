@@ -1,0 +1,54 @@
+.task {
+    display: flex;
+    align-items: center;
+    padding-left: 15px;
+}
+
+.task:hover {
+    background: #f8f8f8;
+}
+
+.checked .check {
+    background: #db4c3f;
+}
+
+.checked .title {
+    text-decoration: line-through;
+}
+
+.check {
+    width: 15px;
+    height: 15px;
+    border: 2px solid #db4c3f;
+    border-radius: 100%;
+    cursor: pointer;
+}
+
+.title {
+    flex: 1;
+    padding: 15px 10px 15px 10px;
+}
+
+.delete {
+    background: transparent;
+    border: none;
+    width: 50px;
+    color: grey;
+    padding: 18px;
+    cursor: pointer;
+}
+
+.delete:hover {
+    background: #f8f8f8;
+}
+
+.check i {
+    color: #fff;
+    font-size: 10px;
+    transform: translate(0, -3px);
+    display: none;
+}
+
+.checked .check i {
+    display: inline-block;
+}
