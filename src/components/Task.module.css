@@ -3,6 +3,7 @@
     align-items: center;
     padding-left: 15px;
     border-bottom: 2px solid #f8f8f8;
+    cursor: pointer;
 }
 
 .task:hover {

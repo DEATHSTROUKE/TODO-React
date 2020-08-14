@@ -21,9 +21,11 @@ const App = () => {
 
     const onChecked = (id) => {
         let tasks = state.tasks.filter(t => t._id === id)[0]
-        tasks.completed = !tasks.completed
-        setState({...state})
-        axios.put(`${server_ip}/${id}`)
+        if (tasks) {
+            tasks.completed = !tasks.completed
+            setState({...state})
+            axios.put(`${server_ip}/${id}`)
+        }
     }
     const onDelete = (id) => {
         let tasks = state.tasks
@@ -33,8 +35,8 @@ const App = () => {
             }
         }
         setState({...state, tasks})
-        axios.delete(`${server_ip}/${id}`).then(res => {
-            console.log(res)
+        axios.delete(`${server_ip}/${id}`).then().catch(() => {
+            alert("Ошибка удаления")
         })
     }
 
