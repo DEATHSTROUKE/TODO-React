@@ -36,8 +36,9 @@
     border: none;
     width: 50px;
     color: grey;
-    padding: 18px;
+    padding: 15px;
     cursor: pointer;
+    font-size: 18px;
 }
 
 .delete:hover {

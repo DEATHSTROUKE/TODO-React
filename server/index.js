@@ -21,19 +21,21 @@ app.get('/api/todo', async (req, res) => {
     res.send(todos)
 })
 
-app.post('/api/todo', (req, res) => {
-    console.log(req.body)
+app.post('/api/todo', async (req, res) => {
     const todo = new Todo({
         title: req.body.title
     })
     todo.save()
-    res.json({status: 'ok'})
+    const last = await Todo.find().sort({'_id':-1}).limit(1)
+    res.json({status: 'ok', id: last[0]._id})
 })
 
 // app.put('/api/todo')
 
-app.delete('/api/todo', (req, res) => {
-
+app.delete('/api/todo/:id', async (req, res) => {
+    console.log(req.params.id)
+    await Todo.find({_id: req.params.id}).remove().exec()
+    res.json({status: 'ok'})
 })
 
 async function start() {
@@ -41,7 +43,8 @@ async function start() {
         await mongoose.connect('mongodb+srv://AnJey:qwertyqwerty@cluster0.wfchm.mongodb.net/TODO', {
             useNewUrlParser: true,
             useFindAndModify: false,
-            useUnifiedTopology: true
+            useUnifiedTopology: true,
+            useCreateIndex: true
         })
         app.listen(3003, () => {
             console.log('server has been started')

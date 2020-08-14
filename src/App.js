@@ -12,9 +12,10 @@ const App = () => {
             fieldText: "",
             tasks: []
         }
-        axios.get(`${server_ip}/api/todo`).then(res => {
+        axios.get(`${server_ip}`).then(res => {
             st.tasks = res.data
             setState(st)
+            console.log(st)
         })
     }, [])
 
@@ -25,8 +26,15 @@ const App = () => {
     }
     const onDelete = (id) => {
         let tasks = state.tasks
-        tasks.splice(id, 1)
+        for (let i = 0; i < tasks.length; i++) {
+            if (tasks[i]._id === id) {
+                tasks.splice(i, 1)
+            }
+        }
         setState({...state, tasks})
+        axios.delete(`${server_ip}/${id}`).then(res => {
+            console.log(res)
+        })
     }
 
     return (
@@ -35,13 +43,13 @@ const App = () => {
                 <h4>Список задач</h4>
             </div>
             <div className={s.main}>
-                <TextField fieldText={state.fieldText} setState={setState} state={state}/>
+                <TextField setState={setState} state={state}/>
                 <div className={s.list}>
                     {state.tasks.map((task, index) => <Task title={task.title}
                                                             isChecked={task.isChecked}
                                                             setState={setState}
                                                             key={index}
-                                                            id={index}
+                                                            id={task._id}
                                                             onChecked={onChecked}
                                                             onDelete={onDelete}/>)}
                 </div>
