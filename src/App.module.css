@@ -19,6 +19,7 @@ body {
     background: #fff;
     border-radius: 10px;
     overflow: hidden;
+    box-shadow: 0 0 29px 0 rgba(50, 50, 50, 0.42);
 }
 
 .title {
@@ -32,6 +33,7 @@ body {
 .main {
 
 }
+
 .list {
     overflow: auto;
     height: 390px;
@@ -43,9 +45,11 @@ body {
         border-radius: 0;
         height: 100%;
     }
+
     .main {
         height: 100%;
     }
+
     .list {
         height: calc(100% - 110px);
     }

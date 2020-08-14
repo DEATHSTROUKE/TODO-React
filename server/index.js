@@ -4,14 +4,14 @@ const Todo = require('./models/Todo')
 
 const app = express()
 app.use(express.json())
-app.options("/*", function(req, res, next) {
+app.options("/*", function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
     res.sendStatus(200);
 });
 
-app.all('*', function(req, res, next) {
+app.all('*', function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     next();
 });
@@ -26,15 +26,18 @@ app.post('/api/todo', async (req, res) => {
         title: req.body.title
     })
     todo.save()
-    const last = await Todo.find().sort({'_id':-1}).limit(1)
+    const last = await Todo.find().sort({'_id': -1}).limit(1)
     res.json({status: 'ok', id: last[0]._id})
 })
 
-// app.put('/api/todo')
+app.put('/api/todo/:id', async (req, res) => {
+    let task = await Todo.findOne({_id: req.params.id})
+    task.updateOne({completed: !task.completed}).exec()
+    res.json({status: 'ok'})
+})
 
 app.delete('/api/todo/:id', async (req, res) => {
-    console.log(req.params.id)
-    await Todo.find({_id: req.params.id}).remove().exec()
+    await Todo.find({_id: req.params.id}).deleteOne().exec()
     res.json({status: 'ok'})
 })
 

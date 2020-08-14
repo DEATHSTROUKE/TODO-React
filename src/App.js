@@ -7,6 +7,7 @@ import {server_ip} from "./config";
 
 const App = () => {
     const [state, setState] = React.useState({fieldText: "", tasks: []})
+    window.state = state
     React.useEffect(() => {
         let st = {
             fieldText: "",
@@ -15,14 +16,14 @@ const App = () => {
         axios.get(`${server_ip}`).then(res => {
             st.tasks = res.data
             setState(st)
-            console.log(st)
         })
     }, [])
 
     const onChecked = (id) => {
-        let tasks = state.tasks
-        tasks[id].isChecked = !tasks[id].isChecked
-        setState({...state, tasks})
+        let tasks = state.tasks.filter(t => t._id === id)[0]
+        tasks.completed = !tasks.completed
+        setState({...state})
+        axios.put(`${server_ip}/${id}`)
     }
     const onDelete = (id) => {
         let tasks = state.tasks
@@ -46,7 +47,7 @@ const App = () => {
                 <TextField setState={setState} state={state}/>
                 <div className={s.list}>
                     {state.tasks.map((task, index) => <Task title={task.title}
-                                                            isChecked={task.isChecked}
+                                                            isChecked={task.completed}
                                                             setState={setState}
                                                             key={index}
                                                             id={task._id}
